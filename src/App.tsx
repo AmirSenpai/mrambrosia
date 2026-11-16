@@ -95,12 +95,14 @@ function ProjectArtwork({ kind }: { kind: string }) {
   return <div className="artwork artwork-gholak" aria-hidden="true"><div className="finance-top"><span>MR GHOLAK</span><span className="finance-dot" /></div><div className="finance-card"><span>موجودی کل</span><strong>۱۲,۵۰۰,۰۰۰</strong><small>ریال · این ماه</small><div className="finance-bars"><i /><i /><i /><i /><i /><i /><i /></div></div><div className="finance-row"><span className="finance-income">↗ درآمد</span><b>+۸,۰۰۰,۰۰۰</b></div><div className="finance-row"><span className="finance-expense">↘ هزینه</span><b>−۳,۵۰۰,۰۰۰</b></div><div className="finance-caption">MONEY, MADE CLEAR.</div></div>;
 }
 
-function Header({ lang, setLang, theme, setTheme, supportPage }: { lang: Language; setLang: (v: Language) => void; theme: Theme; setTheme: (v: Theme) => void; supportPage: boolean }) {
+function getSiteRoot() { const path = window.location.pathname; const clean = path.replace(/\/+$/, ''); if (clean.endsWith('/support-fa')) return clean.slice(0, -'support-fa'.length); if (clean.endsWith('/support')) return clean.slice(0, -'support'.length); if (path.endsWith('/')) return path; return path.slice(0, path.lastIndexOf('/') + 1); }
+
+function Header({ lang, setLang, theme, setTheme, supportPage, siteRoot }: { lang: Language; setLang: (v: Language) => void; theme: Theme; setTheme: (v: Theme) => void; supportPage: boolean; siteRoot: string }) {
   const t = copy[lang]; const [menuOpen, setMenuOpen] = useState(false);
-  const links = [{ href: supportPage ? '/#home' : '#home', label: t.nav[0] }, { href: supportPage ? '/#projects' : '#projects', label: t.nav[1] }, { href: supportPage ? '/#about' : '#about', label: t.nav[2] }];
+  const links = [{ href: supportPage ? siteRoot + '#home' : '#home', label: t.nav[0] }, { href: supportPage ? siteRoot + '#projects' : '#projects', label: t.nav[1] }, { href: supportPage ? siteRoot + '#about' : '#about', label: t.nav[2] }];
   return <header className="site-header"><div className="header-inner">
-    <a className="brand" href="/" aria-label="MrAmbrosia home"><span className="brand-symbol">m<span>.</span></span><span className="brand-name">mrambrosia<span> / independent software</span></span></a>
-    <nav className={menuOpen ? 'main-nav nav-open' : 'main-nav'}>{links.map(link => <a key={link.href} href={link.href} onClick={() => setMenuOpen(false)}>{link.label}</a>)}<a className="nav-support" href={lang === 'fa' ? '/support-fa' : '/support'}>{t.support}<ArrowUpRight size={14} /></a></nav>
+    <a className="brand" href={siteRoot} aria-label="MrAmbrosia home"><span className="brand-symbol">m<span>.</span></span><span className="brand-name">mrambrosia<span> / independent software</span></span></a>
+    <nav className={menuOpen ? 'main-nav nav-open' : 'main-nav'}>{links.map(link => <a key={link.href} href={link.href} onClick={() => setMenuOpen(false)}>{link.label}</a>)}<a className="nav-support" href={siteRoot + (lang === 'fa' ? 'support-fa' : 'support')}>{t.support}<ArrowUpRight size={14} /></a></nav>
     <div className="header-actions"><button className="icon-button" onClick={() => setLang(lang === 'en' ? 'fa' : 'en')} aria-label="Switch language"><Languages size={17} /><span>{lang === 'en' ? 'FA' : 'EN'}</span></button><button className="icon-button theme-button" onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')} aria-label="Toggle theme">{theme === 'light' ? <Moon size={17} /> : <Sun size={17} />}</button><button className="icon-button menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">{menuOpen ? <X size={19} /> : <Menu size={19} />}</button></div>
   </div></header>;
 }
@@ -118,7 +120,7 @@ function ProjectCard({ project, index, lang }: { project: typeof projects[number
   </motion.article>;
 }
 
-function SupportPage({ lang }: { lang: Language }) {
+function SupportPage({ lang, siteRoot }: { lang: Language; siteRoot: string }) {
   const t = copy[lang]; const [region, setRegion] = useState<'iran' | 'global'>(window.location.pathname.endsWith('support-fa') ? 'iran' : 'global');
   return <main className="support-page page-shell">
     <section className="support-hero"><span className="eyebrow"><Heart size={14} /> {t.supportPageKicker}</span><h1>{t.supportPageTitle}</h1><p>{t.supportPageText}</p></section>
@@ -133,20 +135,20 @@ function SupportPage({ lang }: { lang: Language }) {
       </div>}
       <p className="redeem-note"><ShieldCheck size={16} />{t.redeemNote}</p>
     </section>
-    <div className="support-thanks"><Sparkles size={18} /><span>{t.thanks}</span></div><a className="back-link" href="/"><ArrowUpRight size={16} />{t.backHome}</a>
+    <div className="support-thanks"><Sparkles size={18} /><span>{t.thanks}</span></div><a className="back-link" href={siteRoot}><ArrowUpRight size={16} />{t.backHome}</a>
   </main>;
 }
 
 function App() {
-  const isSupportPage = /^\/support(-fa)?\/?$/.test(window.location.pathname);
+  const isSupportPage = /\/support(-fa)?\/?$/.test(window.location.pathname);\n  const siteRoot = getSiteRoot();
   const [lang, setLang] = useState<Language>(() => window.location.pathname.endsWith('support-fa') ? 'fa' : (localStorage.getItem('ambrosia-lang') as Language) || 'fa');
   const [theme, setTheme] = useState<Theme>(() => (localStorage.getItem('ambrosia-theme') as Theme) || 'light');
   const [accent, setAccent] = useState<Accent>(() => (localStorage.getItem('ambrosia-accent') as Accent) || 'blue');
   const [settingsOpen, setSettingsOpen] = useState(false); const t = copy[lang];
   useEffect(() => { document.documentElement.lang = lang; document.documentElement.dir = lang === 'fa' ? 'rtl' : 'ltr'; document.documentElement.dataset.theme = theme; document.documentElement.dataset.accent = accent; localStorage.setItem('ambrosia-lang', lang); localStorage.setItem('ambrosia-theme', theme); localStorage.setItem('ambrosia-accent', accent); }, [lang, theme, accent]);
   return <div className="app-frame">
-    <Header lang={lang} setLang={setLang} theme={theme} setTheme={setTheme} supportPage={isSupportPage} />
-    {isSupportPage ? <SupportPage lang={lang} /> : <main>
+    <Header lang={lang} setLang={setLang} theme={theme} setTheme={setTheme} supportPage={isSupportPage} siteRoot={siteRoot} />
+    {isSupportPage ? <SupportPage lang={lang} siteRoot={siteRoot} /> : <main>
       <section className="hero page-shell" id="home"><div className="hero-content"><motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
         <span className="eyebrow"><span className="eyebrow-mark" />{t.heroKicker}</span><h1>{t.heroTitle}</h1><p className="hero-description">{t.heroText}</p>
         <div className="hero-actions"><a className="button button-dark" href="#projects">{t.explore}<ArrowDown size={16} /></a><a className="button button-quiet" href="https://github.com/AmirSenpai" target="_blank" rel="noreferrer"><Code2 size={17} />{t.github}</a></div>
@@ -158,7 +160,7 @@ function App() {
       <section className="support-banner page-shell"><div className="support-banner-inner"><div><span className="section-index">{t.supportKicker}</span><h2>{t.supportTitle}</h2><p>{t.supportText}</p></div><a className="button button-light" href={lang === 'fa' ? '/support-fa' : '/support'}>{t.supportCta}<ArrowUpRight size={17} /></a><div className="support-spark">✳</div></div></section>
       <section className="contact-section page-shell" id="contact"><div><span className="section-index">03 — SAY HELLO</span><h2>{t.contactTitle}</h2><p>{t.contactText}</p></div><a className="contact-link" href="mailto:itsdekusenpai@gmail.com">{t.contact}<ArrowUpRight size={18} /></a></section>
     </main>}
-    <footer className="site-footer"><div className="footer-inner"><a className="brand" href="/"><span className="brand-symbol">m<span>.</span></span><span className="brand-name">mrambrosia<span> / independent software</span></span></a><span>{t.footer} © {new Date().getFullYear()}</span><span className="footer-credit">{t.made}</span></div></footer>
+    <footer className="site-footer"><div className="footer-inner"><a className="brand" href={siteRoot}><span className="brand-symbol">m<span>.</span></span><span className="brand-name">mrambrosia<span> / independent software</span></span></a><span>{t.footer} © {new Date().getFullYear()}</span><span className="footer-credit">{t.made}</span></div></footer>
     {!isSupportPage && <div className="appearance-wrap">{settingsOpen && <div className="appearance-popover"><div className="appearance-title">{t.theme}</div><div className="appearance-row"><button className={theme === 'light' ? 'selected' : ''} onClick={() => setTheme('light')}><Sun size={15} />{t.light}</button><button className={theme === 'dark' ? 'selected' : ''} onClick={() => setTheme('dark')}><Moon size={15} />{t.dark}</button></div><div className="appearance-title">{t.palette}</div><div className="accent-row">{(['blue', 'violet', 'mint'] as Accent[]).map(color => <button key={color} aria-label={color} className={'accent-swatch swatch-' + color + (accent === color ? ' chosen' : '')} onClick={() => setAccent(color)} />)}</div></div>}<button className="appearance-trigger" onClick={() => setSettingsOpen(!settingsOpen)} aria-label="Appearance settings"><Palette size={18} /></button></div>}
   </div>;
 }
