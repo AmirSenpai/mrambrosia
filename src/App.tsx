@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDown, ArrowUpRight, BookOpen, Code2, Github, Heart, Languages, Menu, Moon, Music2, Palette, ShieldCheck, Sparkles, Sun, WalletCards, X, Coffee } from 'lucide-react';
+import { ArrowDown, ArrowUpRight, BookOpen, Code2, Heart, Languages, Menu, Moon, Music2, Palette, ShieldCheck, Sparkles, Sun, WalletCards, X, Coffee } from 'lucide-react';
 
 type Language = 'en' | 'fa';
 type Theme = 'light' | 'dark';
@@ -19,7 +19,7 @@ const copy = {
     pagenestType: 'READING · ANDROID', pagenestDesc: 'A calm home for your books. Read EPUB, PDF and text, keep your library close, and make space for the habit of reading.',
     moodifyType: 'CREATIVE TOOLS · WEB', moodifyDesc: 'A collection of playful tools for self-expression — avatars, collages, music, wallpapers and little creative experiments.',
     gholakType: 'PERSONAL FINANCE · ANDROID + WEB', gholakDesc: 'A Persian-first companion for tracking money, planning budgets, and understanding your everyday finances without the spreadsheet headache.',
-    status: 'IN ACTIVE DEVELOPMENT', aboutKicker: 'A SMALL INDEPENDENT STUDIO',
+    status: 'INDEPENDENT PROJECT', aboutKicker: 'A SMALL INDEPENDENT STUDIO',
     aboutTitle: 'Made with curiosity. Shipped with care.',
     aboutText: 'MrAmbrosia is the home for the things I make: useful software, small experiments, and ideas that grow into products. No giant team or corporate playbook — just thoughtful work, iteration, and a lot of tabs open.',
     values: ['Useful by default', 'Designed with intention', 'Always getting better'],
@@ -56,7 +56,7 @@ const copy = {
     pagenestType: 'کتاب‌خوانی · اندروید', pagenestDesc: 'خانه‌ای آرام برای کتاب‌هایت. فایل‌های EPUB، PDF و متنی را بخوان، کتابخانه‌ات را مرتب نگه دار و برای عادت مطالعه وقت بساز.',
     moodifyType: 'ابزارهای خلاقانه · وب', moodifyDesc: 'مجموعه‌ای از ابزارهای سرگرم‌کننده برای بیان خلاقیت؛ آواتار، کلاژ، موسیقی، والپیپر و تجربه‌های کوچک.',
     gholakType: 'مدیریت مالی · اندروید و وب', gholakDesc: 'همراهی فارسی برای ثبت دخل‌وخرج، برنامه‌ریزی بودجه و شناخت بهتر وضعیت مالی روزمره، بدون دردسر جدول‌های پیچیده.',
-    status: 'در حال توسعه فعال', aboutKicker: 'یک استودیوی مستقل و کوچک',
+    status: 'پروژه مستقل', aboutKicker: 'یک استودیوی مستقل و کوچک',
     aboutTitle: 'با کنجکاوی ساخته شده؛ با دقت منتشر می‌شود.',
     aboutText: 'MrAmbrosia خانه چیزهایی است که می‌سازم: نرم‌افزارهای کاربردی، آزمایش‌های کوچک و ایده‌هایی که به محصول تبدیل می‌شوند. نه تیم بزرگ و نه دستورالعمل شرکتی؛ فقط ساختن، بهترکردن و کلی تب باز در مرورگر.',
     values: ['کاربردی از همان ابتدا', 'طراحی با هدف', 'همیشه در حال بهترشدن'],
@@ -100,7 +100,7 @@ function Header({ lang, setLang, theme, setTheme, supportPage }: { lang: Languag
   const links = [{ href: supportPage ? '/#home' : '#home', label: t.nav[0] }, { href: supportPage ? '/#projects' : '#projects', label: t.nav[1] }, { href: supportPage ? '/#about' : '#about', label: t.nav[2] }];
   return <header className="site-header"><div className="header-inner">
     <a className="brand" href="/" aria-label="MrAmbrosia home"><span className="brand-symbol">m<span>.</span></span><span className="brand-name">mrambrosia<span> / independent software</span></span></a>
-    <nav className={menuOpen ? 'main-nav nav-open' : 'main-nav'}>{links.map(link => <a key={link.href} href={link.href} onClick={() => setMenuOpen(false)}>{link.label}</a>)}<a className="nav-support" href="/support">{t.support}<ArrowUpRight size={14} /></a></nav>
+    <nav className={menuOpen ? 'main-nav nav-open' : 'main-nav'}>{links.map(link => <a key={link.href} href={link.href} onClick={() => setMenuOpen(false)}>{link.label}</a>)}<a className="nav-support" href={lang === 'fa' ? '/support-fa' : '/support'}>{t.support}<ArrowUpRight size={14} /></a></nav>
     <div className="header-actions"><button className="icon-button" onClick={() => setLang(lang === 'en' ? 'fa' : 'en')} aria-label="Switch language"><Languages size={17} /><span>{lang === 'en' ? 'FA' : 'EN'}</span></button><button className="icon-button theme-button" onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')} aria-label="Toggle theme">{theme === 'light' ? <Moon size={17} /> : <Sun size={17} />}</button><button className="icon-button menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">{menuOpen ? <X size={19} /> : <Menu size={19} />}</button></div>
   </div></header>;
 }
@@ -113,7 +113,7 @@ function ProjectCard({ project, index, lang }: { project: typeof projects[number
   return <motion.article className={'project-card project-' + project.accent} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.15 }} transition={{ duration: 0.55, delay: index * 0.08 }}>
     <div className="project-art"><ProjectArtwork kind={project.accent} /><span className="project-number">{project.id}</span></div>
     <div className="project-copy"><div className="project-meta"><span>{meta.type}</span><span className="status"><i />{t.status}</span></div><h3>{project.title}<span className="project-period">.</span></h3><p>{meta.desc}</p>
-      <div className="project-actions"><a className="text-link" href={project.url} target="_blank" rel="noreferrer">{t.openProject}<ArrowUpRight size={16} /></a><a className="source-link" href={source} target="_blank" rel="noreferrer"><Github size={15} />{t.source}</a></div>
+      <div className="project-actions"><a className="text-link" href={project.url} target="_blank" rel="noreferrer">{t.openProject}<ArrowUpRight size={16} /></a><a className="source-link" href={source} target="_blank" rel="noreferrer"><Code2 size={15} />{t.source}</a></div>
     </div><div className="project-index"><Icon size={16} /><span>{project.id} / 03</span></div>
   </motion.article>;
 }
@@ -128,7 +128,7 @@ function SupportPage({ lang }: { lang: Language }) {
         <article className="support-option"><div className="option-icon pending"><Coffee size={21} /></div><span className="option-label">01 / TIP JAR</span><h3>{t.iranTitle}</h3><p>{t.iranText}</p><div className="pending-note"><span className="pending-dot" />{t.gatewayPending}</div></article>
         <article className="support-option"><div className="option-icon"><BookOpen size={21} /></div><span className="option-label">02 / PAGENEST PRO</span><h3>{t.pagenestPro}</h3><p>{t.proText}</p><a className="button button-dark" href="https://myket.ir/app/ir.pagenest.mrambrosia" target="_blank" rel="noreferrer">{t.buyMyket}<ArrowUpRight size={16} /></a></article>
       </div> : <div className="support-options">
-        <article className="support-option"><div className="option-icon"><Github size={21} /></div><span className="option-label">01 / COMMUNITY</span><h3>{t.globalTitle}</h3><p>{t.globalText}</p><a className="button button-dark" href="https://github.com/AmirSenpai" target="_blank" rel="noreferrer">{t.githubSupport}<ArrowUpRight size={16} /></a></article>
+        <article className="support-option"><div className="option-icon"><Code2 size={21} /></div><span className="option-label">01 / COMMUNITY</span><h3>{t.globalTitle}</h3><p>{t.globalText}</p><a className="button button-dark" href="https://github.com/AmirSenpai" target="_blank" rel="noreferrer">{t.githubSupport}<ArrowUpRight size={16} /></a></article>
         <article className="support-option"><div className="option-icon"><BookOpen size={21} /></div><span className="option-label">02 / PAGENEST PRO</span><h3>{t.pagenestPro}</h3><p>{t.proText}</p><div className="pending-note"><span className="pending-dot" />{t.internationalSoon}</div></article>
       </div>}
       <p className="redeem-note"><ShieldCheck size={16} />{t.redeemNote}</p>
@@ -149,13 +149,13 @@ function App() {
     {isSupportPage ? <SupportPage lang={lang} /> : <main>
       <section className="hero page-shell" id="home"><div className="hero-content"><motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.55 }}>
         <span className="eyebrow"><span className="eyebrow-mark" />{t.heroKicker}</span><h1>{t.heroTitle}</h1><p className="hero-description">{t.heroText}</p>
-        <div className="hero-actions"><a className="button button-dark" href="#projects">{t.explore}<ArrowDown size={16} /></a><a className="button button-quiet" href="https://github.com/AmirSenpai" target="_blank" rel="noreferrer"><Github size={17} />{t.github}</a></div>
+        <div className="hero-actions"><a className="button button-dark" href="#projects">{t.explore}<ArrowDown size={16} /></a><a className="button button-quiet" href="https://github.com/AmirSenpai" target="_blank" rel="noreferrer"><Code2 size={17} />{t.github}</a></div>
       </motion.div></div>
       <motion.div className="hero-art" initial={{ opacity: 0, scale: 0.94 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.7, delay: 0.15 }}><div className="hero-grid" /><div className="hero-orbit hero-orbit-a" /><div className="hero-orbit hero-orbit-b" /><div className="hero-stamp"><span>MR</span><strong>AMBROSIA</strong><small>SOFTWARE / STUDIO</small></div><div className="hero-side-note">IDEAS INTO INTERFACES — SINCE ALWAYS</div><div className="hero-coordinate">35° 42' N / BUILD MODE</div></motion.div>
       <div className="hero-bottom"><span>{t.projectCount}</span><span>{t.scroll} ↓</span></div></section>
       <section className="projects-section page-shell" id="projects"><div className="section-heading"><div><span className="section-index">01 — {t.featured}</span><h2>{t.projectsTitle}</h2></div><p>{t.projectsIntro}</p></div><div className="projects-grid">{projects.map((project, index) => <ProjectCard key={project.key} project={project} index={index} lang={lang} />)}</div></section>
       <section className="about-section page-shell" id="about"><div className="about-mark"><Code2 size={34} /><span>BUILD / REFINE / REPEAT</span></div><div className="about-copy"><span className="section-index">02 — {t.aboutKicker}</span><h2>{t.aboutTitle}</h2><p>{t.aboutText}</p><div className="value-list">{t.values.map((value, i) => <span key={value}><b>0{i + 1}</b>{value}</span>)}</div></div></section>
-      <section className="support-banner page-shell"><div className="support-banner-inner"><div><span className="section-index">{t.supportKicker}</span><h2>{t.supportTitle}</h2><p>{t.supportText}</p></div><a className="button button-light" href="/support">{t.supportCta}<ArrowUpRight size={17} /></a><div className="support-spark">✳</div></div></section>
+      <section className="support-banner page-shell"><div className="support-banner-inner"><div><span className="section-index">{t.supportKicker}</span><h2>{t.supportTitle}</h2><p>{t.supportText}</p></div><a className="button button-light" href={lang === 'fa' ? '/support-fa' : '/support'}>{t.supportCta}<ArrowUpRight size={17} /></a><div className="support-spark">✳</div></div></section>
       <section className="contact-section page-shell" id="contact"><div><span className="section-index">03 — SAY HELLO</span><h2>{t.contactTitle}</h2><p>{t.contactText}</p></div><a className="contact-link" href="mailto:itsdekusenpai@gmail.com">{t.contact}<ArrowUpRight size={18} /></a></section>
     </main>}
     <footer className="site-footer"><div className="footer-inner"><a className="brand" href="/"><span className="brand-symbol">m<span>.</span></span><span className="brand-name">mrambrosia<span> / independent software</span></span></a><span>{t.footer} © {new Date().getFullYear()}</span><span className="footer-credit">{t.made}</span></div></footer>
