@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import {
-  ArrowDown, ArrowUpRight, BookOpen, Bookmark, CalendarDays, ChartNoAxesCombined,
-  Check, Code2, Coffee, FileText, Globe2, Heart, Image, Languages, Menu,
-  Music2, Palette, PenLine, QrCode, ShieldCheck, Smartphone, Sparkles,
-  TrendingUp, WalletCards, X,
+  ArrowDown, ArrowUpRight, BookOpen, Code2, Coffee, Heart, Languages, Menu,
+  Palette, ShieldCheck, Sparkles, WalletCards, X,
 } from 'lucide-react';
 
 type Language = 'en' | 'fa';
