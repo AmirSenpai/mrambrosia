@@ -1,73 +1,46 @@
-# React + TypeScript + Vite
+# MrAmbrosia
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+MrAmbrosia is the independent software studio and project home of Amir (AmirSenpai).
 
-Currently, two official plugins are available:
+Live site: https://mrambrosia.ir
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## The studio
 
-## React Compiler
+A small independent studio building thoughtful digital products. The site brings together three flagship projects while giving each one its own visual identity.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Project | Focus | Official destination |
+| --- | --- | --- |
+| PageNest | Android reading app for EPUB, PDF and text | https://github.com/AmirSenpai/PageNest |
+| Moodify | Creative web tools for avatars, collages, music, wallpapers and more | https://www.moodifyweb.ir |
+| Mr Gholak | Persian-first personal finance app for Android and web | https://mrgholak.ir |
 
-## Expanding the ESLint configuration
+## Design system
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+The visual direction takes inspiration from the clarity and product-directory structure of ArtCraft:
+- Editorial typography (Archivo / Inter / DM Mono, with Vazirmatn for Persian).
+- Thin 1px rules, structured grids, restrained square geometry and generous whitespace.
+- A distinct product hero treatment for every project.
+- Responsive layouts, reduced-motion support and accessible controls.
+- Light/dark appearance plus blue, violet and mint accent choices.
+- Persian and English content with automatic RTL/LTR direction.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+This is an original implementation. It does not reuse ArtCraft's proprietary assets or branding.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Support
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+The support pages are /support (international) and /support-fa (Iranian Persian).
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The PageNest MonetizationConfig.kt is the source of truth for the links represented here:
+- Iran tip jar: https://mrambrosia.ir/support-fa (the local gateway itself is not configured yet).
+- International tip jar: https://mrambrosia.ir/support (no external payment provider is configured yet).
+- GitHub: https://github.com/AmirSenpai.
+- PageNest Pro Iran: https://myket.ir/app/ir.pagenest.mrambrosia.
+- PageNest Pro international: not active yet.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+The site intentionally does not expose supporter activation codes. Codes are redeemed inside PageNest, not on this website. No payment is claimed to be active where no payment provider URL exists.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Development
+
+Install dependencies with npm ci, then use npm run dev, npm run lint, npm run build, or npm run preview.
+
+Built with React, TypeScript, Vite, Tailwind CSS, Framer Motion, and Lucide icons.
