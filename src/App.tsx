@@ -140,7 +140,8 @@ function SupportPage({ lang, siteRoot }: { lang: Language; siteRoot: string }) {
 }
 
 function App() {
-  const isSupportPage = /\/support(-fa)?\/?$/.test(window.location.pathname);\n  const siteRoot = getSiteRoot();
+  const isSupportPage = /\/support(-fa)?\/?$/.test(window.location.pathname);
+  const siteRoot = getSiteRoot();
   const [lang, setLang] = useState<Language>(() => window.location.pathname.endsWith('support-fa') ? 'fa' : (localStorage.getItem('ambrosia-lang') as Language) || 'fa');
   const [theme, setTheme] = useState<Theme>(() => (localStorage.getItem('ambrosia-theme') as Theme) || 'light');
   const [accent, setAccent] = useState<Accent>(() => (localStorage.getItem('ambrosia-accent') as Accent) || 'blue');
@@ -157,7 +158,7 @@ function App() {
       <div className="hero-bottom"><span>{t.projectCount}</span><span>{t.scroll} ↓</span></div></section>
       <section className="projects-section page-shell" id="projects"><div className="section-heading"><div><span className="section-index">01 — {t.featured}</span><h2>{t.projectsTitle}</h2></div><p>{t.projectsIntro}</p></div><div className="projects-grid">{projects.map((project, index) => <ProjectCard key={project.key} project={project} index={index} lang={lang} />)}</div></section>
       <section className="about-section page-shell" id="about"><div className="about-mark"><Code2 size={34} /><span>BUILD / REFINE / REPEAT</span></div><div className="about-copy"><span className="section-index">02 — {t.aboutKicker}</span><h2>{t.aboutTitle}</h2><p>{t.aboutText}</p><div className="value-list">{t.values.map((value, i) => <span key={value}><b>0{i + 1}</b>{value}</span>)}</div></div></section>
-      <section className="support-banner page-shell"><div className="support-banner-inner"><div><span className="section-index">{t.supportKicker}</span><h2>{t.supportTitle}</h2><p>{t.supportText}</p></div><a className="button button-light" href={lang === 'fa' ? '/support-fa' : '/support'}>{t.supportCta}<ArrowUpRight size={17} /></a><div className="support-spark">✳</div></div></section>
+      <section className="support-banner page-shell"><div className="support-banner-inner"><div><span className="section-index">{t.supportKicker}</span><h2>{t.supportTitle}</h2><p>{t.supportText}</p></div><a className="button button-light" href={siteRoot + (lang === 'fa' ? 'support-fa' : 'support')}>{t.supportCta}<ArrowUpRight size={17} /></a><div className="support-spark">✳</div></div></section>
       <section className="contact-section page-shell" id="contact"><div><span className="section-index">03 — SAY HELLO</span><h2>{t.contactTitle}</h2><p>{t.contactText}</p></div><a className="contact-link" href="mailto:itsdekusenpai@gmail.com">{t.contact}<ArrowUpRight size={18} /></a></section>
     </main>}
     <footer className="site-footer"><div className="footer-inner"><a className="brand" href={siteRoot}><span className="brand-symbol">m<span>.</span></span><span className="brand-name">mrambrosia<span> / independent software</span></span></a><span>{t.footer} © {new Date().getFullYear()}</span><span className="footer-credit">{t.made}</span></div></footer>
