@@ -115,7 +115,7 @@ function ProductCard({ product, index, lang }: { product: typeof products[number
   const Icon = { pagenest: BookOpen, moodify: Palette, gholak: WalletCards }[product.key];
   return <motion.article className={'product-card product-' + product.kind} initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.12 }} transition={{ duration: 0.45, delay: index * 0.07 }}>
     <div className="product-art"><ProductArtwork kind={product.kind} /><span className="product-number">{product.number}</span></div>
-    <div className="product-body"><div className="product-meta"><span>{type}</span><span className="product-status"><i />{status}</span></div><h3>{product.name}<span>.</span></h3><p>{summary}</p><div className="product-actions"><a className="text-link" href={product.href} target="_blank" rel="noreferrer">{product.key === 'pagenest' ? t.pagenestLinkLabel : product.key === 'moodify' ? t.moodifyLinkLabel : t.gholakLinkLabel}<ArrowUpRight size={15} /></a><a className="text-link text-link-muted" href={'#detail-' + product.key}></a></div></div>
+    <div className="product-body"><div className="product-meta"><span>{type}</span><span className="product-status"><i />{status}</span></div><h3>{product.name}<span>.</span></h3><p>{summary}</p><div className="product-actions"><a className="text-link" href={product.href} target="_blank" rel="noreferrer">{product.key === 'pagenest' ? t.pagenestLinkLabel : product.key === 'moodify' ? t.moodifyLinkLabel : t.gholakLinkLabel}<ArrowUpRight size={15} /></a></div></div>
     <div className="product-index"><Icon size={15} /><span>{product.number} / 03</span></div>
   </motion.article>;
 }
