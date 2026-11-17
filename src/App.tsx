@@ -12,11 +12,11 @@ const copy = {
   en: {
     nav: ['Studio', 'Products', 'About'], support: 'Support',
     heroKicker: 'INDEPENDENT SOFTWARE STUDIO · AMIR SENPAI',
-    heroTitle: 'Small studio. Real software. Thoughtful details.',
-    heroText: 'MrAmbrosia is the home of three independent products built around different everyday needs: reading, making things, and managing money.',
+    heroTitle: 'Independent software, built with purpose.',
+    heroText: 'MrAmbrosia is an independent software studio creating focused digital products for reading, creativity, and personal finance.',
     explore: 'Explore the products', github: 'About the studio',
-    productsEyebrow: 'THE PRODUCT LINEUP', productsTitle: 'Three products, each with its own point of view.',
-    productsIntro: 'Not one app stretched across three use cases. Each product has its own audience, interface, and job to do.',
+    productsEyebrow: 'THE PRODUCT LINEUP', productsTitle: 'Three products. Three clear purposes.',
+    productsIntro: 'A focused collection of products, each designed around a distinct everyday need.',
     openProduct: 'Open product', productDetails: 'Product details',
     pagenestType: 'ANDROID READING · VERSION 3.1.0',
     pagenestSummary: 'A local-first reading library and reader for people who want their books organised, comfortable to read, and available offline.',
@@ -24,7 +24,7 @@ const copy = {
     moodifySummary: 'A bilingual collection of small creative and file tools: make visual pieces, prepare images and documents, and create assets in the browser.',
     gholakType: 'PERSIAN PERSONAL FINANCE · WEB + ANDROID',
     gholakSummary: 'A Persian-first money manager for tracking everyday finances, planning ahead, and keeping a clearer picture of what comes in and goes out.',
-    current: 'Current status', pagenestStatus: 'Android · v3.1.0', moodifyStatus: 'Web app · available', gholakStatus: 'Web app · Android 2.0 candidate',
+    current: 'Current status', pagenestStatus: 'Android · v3.1.0', moodifyStatus: 'Web app · available', gholakStatus: 'Web app · available',
     pagenestDetailTitle: 'A reading space that stays yours.',
     pagenestDetail: 'PageNest keeps the library on the device and focuses on the reading experience: import books, organise shelves, tune the page, and return exactly where you left off.',
     pagenestFeatures: [
@@ -55,8 +55,8 @@ const copy = {
     ],
     gholakStatusNote: 'The repository currently documents 2.0.0 as a release candidate. The web app is available; the Android 2.0.0 release is not presented here as publicly shipped.',
     gholakTech: 'Expo · React Native · React Native Web · Supabase',
-    aboutKicker: 'ABOUT THE STUDIO', aboutTitle: 'Independent by choice. Product-minded by default.',
-    aboutText: 'MrAmbrosia is an independent software studio led by Amir. It brings together products that solve different problems, but share the same approach: understand the real use case, keep the interface intentional, and ship improvements without pretending unfinished work is finished.',
+    aboutKicker: 'ABOUT THE STUDIO', aboutTitle: 'Independent software, thoughtfully made.',
+    aboutText: 'MrAmbrosia is an independent software studio founded by Amir. We build practical digital products with a focus on clarity, usability, and thoughtful engineering.',
     principles: ['Build for a real use case', 'Respect people’s data', 'Be clear about product status', 'Improve the details'],
     supportKicker: 'KEEP GOOD INDEPENDENT SOFTWARE MOVING',
     supportTitle: 'If a product helped, help it keep growing.',
@@ -87,11 +87,11 @@ const copy = {
   fa: {
     nav: ['استودیو', 'محصولات', 'درباره'], support: 'حمایت',
     heroKicker: 'استودیوی مستقل نرم‌افزار · امیر سنپای',
-    heroTitle: 'استودیویی کوچک؛ نرم‌افزارهایی واقعی با جزئیات حساب‌شده.',
-    heroText: 'MrAmbrosia خانه سه محصول مستقل است که هرکدام برای بخشی از زندگی روزمره ساخته شده‌اند: کتاب‌خواندن، خلق‌کردن و مدیریت پول.',
+    heroTitle: 'نرم‌افزار مستقل، با هدف و دقت ساخته‌شده.',
+    heroText: 'MrAmbrosia یک استودیوی مستقل نرم‌افزار است که محصولاتی کاربردی در حوزه مطالعه، خلاقیت و مدیریت مالی توسعه می‌دهد.',
     explore: 'دیدن محصولات', github: 'درباره استودیو',
-    productsEyebrow: 'محصولات استودیو', productsTitle: 'سه محصول با سه هدف مشخص.',
-    productsIntro: 'قرار نیست یک اپلیکیشن را به سه کاربرد متفاوت تحمیل کنیم. هر محصول مخاطب، رابط و مسئله خودش را دارد.',
+    productsEyebrow: 'محصولات استودیو', productsTitle: 'سه محصول، با سه کاربرد روشن.',
+    productsIntro: 'مجموعه‌ای از محصولات مستقل که هرکدام برای پاسخ به یک نیاز مشخص طراحی شده‌اند.',
     openProduct: 'ورود به محصول', productDetails: 'جزئیات محصول',
     pagenestType: 'کتاب‌خوان اندروید · نسخه ۳.۱.۰',
     pagenestSummary: 'کتابخانه و کتاب‌خوانی آفلاین و محلی برای کسانی که می‌خواهند کتاب‌هایشان مرتب، خواندنشان راحت و همیشه در دسترس باشد.',
@@ -99,7 +99,7 @@ const copy = {
     moodifySummary: 'مجموعه‌ای دوزبانه از ابزارهای کوچک خلاقانه و فایل؛ برای ساخت محتوای بصری، آماده‌سازی عکس و سند و انجام کارها در مرورگر.',
     gholakType: 'مدیریت مالی فارسی · وب و اندروید',
     gholakSummary: 'مدیریت مالی فارسی‌محور برای ثبت دخل‌وخرج، برنامه‌ریزی و داشتن تصویری روشن‌تر از پولی که وارد و خارج می‌شود.',
-    current: 'وضعیت فعلی', pagenestStatus: 'اندروید · نسخه ۳.۱.۰', moodifyStatus: 'وب‌اپ · در دسترس', gholakStatus: 'وب‌اپ · نامزد اندروید ۲.۰',
+    current: 'وضعیت فعلی', pagenestStatus: 'اندروید · نسخه ۳.۱.۰', moodifyStatus: 'وب‌اپ · در دسترس', gholakStatus: 'وب‌اپ · در دسترس',
     pagenestDetailTitle: 'فضایی برای خواندن که مال خودت می‌ماند.',
     pagenestDetail: 'PageNest کتابخانه را روی خود دستگاه نگه می‌دارد و روی تجربه مطالعه تمرکز می‌کند: کتاب وارد کن، قفسه‌ها را مرتب کن، صفحه را مطابق سلیقه‌ات تنظیم کن و دقیقاً از همان‌جایی که مانده بودی ادامه بده.',
     pagenestFeatures: [
@@ -130,8 +130,8 @@ const copy = {
     ],
     gholakStatusNote: 'مستندات فعلی مخزن، نسخه ۲.۰.۰ را نامزد انتشار معرفی می‌کنند. وب‌اپ در دسترس است؛ نسخه اندروید ۲.۰.۰ را به‌عنوان نسخه عمومی منتشرشده معرفی نمی‌کنیم.',
     gholakTech: 'Expo · React Native · React Native Web · Supabase',
-    aboutKicker: 'درباره استودیو', aboutTitle: 'استقلال در ساخت؛ تمرکز بر محصول در تصمیم‌ها.',
-    aboutText: 'MrAmbrosia استودیوی مستقل نرم‌افزار به مدیریت امیر است. اینجا محصولاتی کنار هم قرار می‌گیرند که مسائل متفاوتی را حل می‌کنند، اما رویکرد مشترکی دارند: مسئله واقعی را بفهم، رابط را هدفمند نگه دار و پیشرفت‌ها را منتشر کن؛ بدون اینکه کار نیمه‌تمام را کامل جا بزنی.',
+    aboutKicker: 'درباره استودیو', aboutTitle: 'نرم‌افزار مستقل، با تمرکز بر کیفیت.',
+    aboutText: 'MrAmbrosia استودیوی مستقل نرم‌افزار به بنیان‌گذاری امیر است. تمرکز ما توسعه محصولات دیجیتال کاربردی با رابطی روشن، تجربه‌ای قابل‌اعتماد و مهندسی دقیق است.',
     principles: ['ساخت برای یک نیاز واقعی', 'احترام به داده کاربران', 'شفافیت درباره وضعیت محصول', 'بهبود جزئیات'],
     supportKicker: 'کمک به ادامه مسیر نرم‌افزار مستقل',
     supportTitle: 'اگر محصولی به کارت آمده، کمک کن رشد کند.',
@@ -186,7 +186,7 @@ function Header({ lang, setLang, supportPage, siteRoot }: { lang: Language; setL
   ];
   return <header className="site-header"><div className="header-inner">
     <a className="brand" href={siteRoot} aria-label="MrAmbrosia home"><span className="brand-symbol">m<span>.</span></span><span className="brand-name">mrambrosia<span>/ independent software</span></span></a>
-    <nav className={menuOpen ? 'main-nav nav-open' : 'main-nav'}>{links.map(link => <a key={link.href} href={link.href} onClick={() => setMenuOpen(false)}>{link.label}</a>)}<a className="nav-support" href={siteRoot + (lang === 'fa' ? 'support-fa' : 'support')}>{t.support}<ArrowUpRight size={14} /></a></nav>
+    <nav className={menuOpen ? 'main-nav nav-open' : 'main-nav'}>{links.map(link => <a key={link.href} href={link.href} onClick={() => setMenuOpen(false)}>{link.label}</a>)}</nav>
     <div className="header-actions"><button className="icon-button language-button" onClick={() => setLang(lang === 'en' ? 'fa' : 'en')} aria-label="Switch language"><Languages size={16} /><span>{lang === 'en' ? 'FA' : 'EN'}</span></button><button className="icon-button menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">{menuOpen ? <X size={19} /> : <Menu size={19} />}</button></div>
   </div></header>;
 }
@@ -216,7 +216,7 @@ function ProductCard({ product, index, lang }: { product: typeof products[number
   const Icon = { pagenest: BookOpen, moodify: Palette, gholak: WalletCards }[product.key];
   return <motion.article className={'product-card product-' + product.kind} initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.12 }} transition={{ duration: 0.45, delay: index * 0.07 }}>
     <div className="product-art"><ProductArtwork kind={product.kind} /><span className="product-number">{product.number}</span></div>
-    <div className="product-body"><div className="product-meta"><span>{type}</span><span className="product-status"><i />{status}</span></div><h3>{product.name}<span>.</span></h3><p>{summary}</p><div className="product-actions"><a className="text-link" href={product.href} target="_blank" rel="noreferrer">{product.key === 'pagenest' ? t.pagenestLinkLabel : product.key === 'moodify' ? t.moodifyLinkLabel : t.gholakLinkLabel}<ArrowUpRight size={15} /></a><a className="text-link text-link-muted" href={'#detail-' + product.key}>{t.productDetails}<ArrowDown size={14} /></a></div></div>
+    <div className="product-body"><div className="product-meta"><span>{type}</span><span className="product-status"><i />{status}</span></div><h3>{product.name}<span>.</span></h3><p>{summary}</p><div className="product-actions"><a className="text-link" href={product.href} target="_blank" rel="noreferrer">{product.key === 'pagenest' ? t.pagenestLinkLabel : product.key === 'moodify' ? t.moodifyLinkLabel : t.gholakLinkLabel}<ArrowUpRight size={15} /></a><a className="text-link text-link-muted" href={'#detail-' + product.key}></a></div></div>
     <div className="product-index"><Icon size={15} /><span>{product.number} / 03</span></div>
   </motion.article>;
 }
@@ -277,9 +277,7 @@ function App() {
       <motion.div className="hero-art" initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.55, delay: 0.08 }}><div className="hero-art-grid" /><div className="hero-orbit hero-orbit-a" /><div className="hero-orbit hero-orbit-b" /><div className="hero-mark"><span>MR</span><strong>AMBROSIA</strong><small>SOFTWARE / STUDIO</small></div><div className="hero-side-note">IDEAS INTO SOFTWARE</div><div className="hero-coordinate">INDEPENDENT / PRODUCT STUDIO</div></motion.div>
       <div className="hero-bottom"><span>{t.projectCount}</span><span>{t.scroll} ↓</span></div></section>
       <section className="products-section page-shell" id="products"><div className="section-heading"><div><span className="section-index">01 — {t.productsEyebrow}</span><h2>{t.productsTitle}</h2></div><p>{t.productsIntro}</p></div><div className="products-grid">{products.map((product,index)=><ProductCard key={product.key} product={product} index={index} lang={lang} />)}</div></section>
-      <ProductDetails lang={lang} />
       <section className="about-section page-shell" id="about"><div className="about-mark"><Code2 size={34} /><span>BUILD / VERIFY / IMPROVE</span></div><div className="about-copy"><span className="section-index">03 — {t.aboutKicker}</span><h2>{t.aboutTitle}</h2><p>{t.aboutText}</p><div className="principle-list">{t.principles.map((value,i)=><span key={value}><b>0{i+1}</b>{value}</span>)}</div></div></section>
-      <section className="support-banner page-shell"><div className="support-banner-inner"><div><span className="section-index">{t.supportKicker}</span><h2>{t.supportTitle}</h2><p>{t.supportText}</p></div><a className="button button-light" href={siteRoot + (lang === 'fa' ? 'support-fa' : 'support')}>{t.supportCta}<ArrowUpRight size={17} /></a><div className="support-spark">✳</div></div></section>
       <section className="contact-section page-shell" id="contact"><div><span className="section-index">04 — CONTACT</span><h2>{t.contactTitle}</h2><p>{t.contactText}</p></div><a className="contact-link" href="mailto:itsdekusenpai@gmail.com">{t.contact}<ArrowUpRight size={18} /></a></section>
     </main>}
     <footer className="site-footer"><div className="footer-inner"><a className="brand" href={siteRoot}><span className="brand-symbol">m<span>.</span></span><span className="brand-name">mrambrosia<span>/ independent software</span></span></a><span>{t.footer} © {new Date().getFullYear()}</span><span className="footer-credit">{t.made}</span></div></footer>
