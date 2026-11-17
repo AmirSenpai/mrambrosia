@@ -140,8 +140,6 @@ function GitHubActivity({ lang }: { lang: Language }) {
 
   useEffect(() => {
     const controller = new AbortController();
-    setLoading(true);
-    setFailed(false);
     fetch('/api/github', { signal: controller.signal })
       .then(response => {
         if (!response.ok) throw new Error('GitHub activity request failed');
@@ -170,7 +168,7 @@ function GitHubActivity({ lang }: { lang: Language }) {
       <a className="activity-profile-link" href="https://github.com/AmirSenpai" target="_blank" rel="noreferrer"><Github size={16} />{t.viewGithub}<ArrowUpRight size={14} /></a>
     </div>
     {loading && <div className="activity-loading" aria-live="polite"><span className="activity-spinner" />{t.loadingActivity}</div>}
-    {failed && !loading && <div className="activity-error" role="status"><span>{t.activityError}</span><button onClick={() => setAttempt(value => value + 1)}><RefreshCw size={14} />{t.retry}</button></div>}
+    {failed && !loading && <div className="activity-error" role="status"><span>{t.activityError}</span><button onClick={() => { setLoading(true); setFailed(false); setAttempt(value => value + 1); }}><RefreshCw size={14} />{t.retry}</button></div>}
     {data && <>
       <div className="activity-stats">{stats.map(item => {
         const Icon = item.icon;
