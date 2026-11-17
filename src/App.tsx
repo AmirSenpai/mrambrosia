@@ -178,7 +178,7 @@ function GitHubActivity({ lang }: { lang: Language }) {
       })}</div>
       <div className="activity-panels">
         <div className="activity-panel contribution-panel">
-          <div className="activity-panel-heading"><div><h3>{t.contributions}</h3><span>{number(data.stats.total)} · {lang === 'fa' ? '۳۶۵ روز گذشته' : 'last 365 days'}</span></div><span className="activity-year">{data.calendar.length ? new Date().getFullYear() : ''}</span></div>
+          <div className="activity-panel-heading"><div><h3>{t.contributions}</h3><span>{number(data.stats.total)} · {lang === 'fa' ? '۳۶۵ روز گذشته' : 'last 365 days'}</span></div><span className="activity-year">365D</span></div>
           <div className="heatmap-scroll"><div className="contribution-heatmap" role="group" aria-label="GitHub contribution activity for the last year">
             {data.calendar.map((week, weekIndex) => week.contributionDays.map(day =>
               <span
