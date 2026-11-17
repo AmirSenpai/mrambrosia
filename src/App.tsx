@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import {
   ArrowDown, ArrowUpRight, BookOpen, Code2, Languages, Menu,
-  Palette, WalletCards, X, Github, GitCommitHorizontal, GitPullRequest, FolderGit2, RefreshCw,
+  Palette, WalletCards, X, GitCommitHorizontal, GitPullRequest, FolderGit2, RefreshCw,
 } from 'lucide-react';
 
 type Language = 'en' | 'fa';
@@ -156,7 +156,7 @@ function GitHubActivity({ lang }: { lang: Language }) {
   }, [attempt]);
 
   const stats = data ? [
-    { label: t.contributions, value: data.stats.total, icon: Github },
+    { label: t.contributions, value: data.stats.total, icon: Code2 },
     { label: t.commits, value: data.stats.commits, icon: GitCommitHorizontal },
     { label: t.pullRequests, value: data.stats.pullRequests, icon: GitPullRequest },
     { label: t.repositories, value: data.profile.publicRepositories, icon: FolderGit2 },
@@ -165,7 +165,7 @@ function GitHubActivity({ lang }: { lang: Language }) {
   return <section className="activity-section page-shell" id="activity">
     <div className="activity-heading">
       <div><span className="section-index">01 — GITHUB ACTIVITY</span><h2>{t.activityTitle}</h2><p>{t.activityIntro}</p></div>
-      <a className="activity-profile-link" href="https://github.com/AmirSenpai" target="_blank" rel="noreferrer"><Github size={16} />{t.viewGithub}<ArrowUpRight size={14} /></a>
+      <a className="activity-profile-link" href="https://github.com/AmirSenpai" target="_blank" rel="noreferrer"><Code2 size={16} />{t.viewGithub}<ArrowUpRight size={14} /></a>
     </div>
     {loading && <div className="activity-loading" aria-live="polite"><span className="activity-spinner" />{t.loadingActivity}</div>}
     {failed && !loading && <div className="activity-error" role="status"><span>{t.activityError}</span><button onClick={() => { setLoading(true); setFailed(false); setAttempt(value => value + 1); }}><RefreshCw size={14} />{t.retry}</button></div>}
