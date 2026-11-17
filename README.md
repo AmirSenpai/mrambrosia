@@ -59,7 +59,7 @@ This repository is configured for **Cloudflare Pages Git integration**. No Wrang
    | Root directory | `/` (repository root) |
    | Build command | `npm run build` |
    | Build output directory | `dist` |
-   | Node.js version | `22` |
+   | Node.js version | `22` (`NODE_VERSION=22`) |
 
 5. Select **Save and Deploy**.
 
