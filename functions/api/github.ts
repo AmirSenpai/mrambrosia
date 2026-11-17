@@ -155,10 +155,9 @@ export async function onRequestGet({ request, env }: PagesContext) {
       }
     }
 
-    const languages = [...languageTotals.values()]
-      .sort((a, b) => b.bytes - a.bytes)
-      .slice(0, 5);
-    const languageBytes = languages.reduce((sum, language) => sum + language.bytes, 0);
+    const allLanguages = [...languageTotals.values()].sort((a, b) => b.bytes - a.bytes);
+    const languageBytes = allLanguages.reduce((sum, language) => sum + language.bytes, 0);
+    const languages = allLanguages.slice(0, 5);
 
     const contributions = user.contributionsCollection;
     const result = {
