@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import {
-  ArrowDown, ArrowUpRight, BookOpen, Code2, Coffee, Heart, Languages, Menu,
-  Palette, ShieldCheck, Sparkles, WalletCards, X,
+  ArrowDown, ArrowUpRight, BookOpen, Code2, Languages, Menu,
+  Palette, WalletCards, X,
 } from 'lucide-react';
 
 type Language = 'en' | 'fa';
@@ -167,25 +167,16 @@ const products: { key: ProjectKey; number: string; name: string; href: string; k
   { key: 'gholak', number: '03', name: 'Mr Gholak', href: 'https://webapp.mrgholak.ir', kind: 'gholak' },
 ];
 
-function getSiteRoot() {
-  const path = window.location.pathname;
-  const clean = path.replace(/\/+$/, '');
-  if (clean.endsWith('/support-fa')) return clean.slice(0, -'support-fa'.length);
-  if (clean.endsWith('/support')) return clean.slice(0, -'support'.length);
-  if (path.endsWith('/')) return path;
-  return path.slice(0, path.lastIndexOf('/') + 1);
-}
-
-function Header({ lang, setLang, supportPage, siteRoot }: { lang: Language; setLang: (v: Language) => void; supportPage: boolean; siteRoot: string }) {
+function Header({ lang, setLang }: { lang: Language; setLang: (v: Language) => void }) {
   const t = copy[lang];
   const [menuOpen, setMenuOpen] = useState(false);
   const links = [
-    { href: supportPage ? siteRoot + '#home' : '#home', label: t.nav[0] },
-    { href: supportPage ? siteRoot + '#products' : '#products', label: t.nav[1] },
-    { href: supportPage ? siteRoot + '#about' : '#about', label: t.nav[2] },
+    { href: '#home', label: t.nav[0] },
+    { href: '#products', label: t.nav[1] },
+    { href: '#about', label: t.nav[2] },
   ];
   return <header className="site-header"><div className="header-inner">
-    <a className="brand" href={siteRoot} aria-label="MrAmbrosia home"><span className="brand-symbol">m<span>.</span></span><span className="brand-name">mrambrosia<span>/ independent software</span></span></a>
+    <a className="brand" href="/" aria-label="MrAmbrosia home"><span className="brand-symbol">m<span>.</span></span><span className="brand-name">mrambrosia<span>/ independent software</span></span></a>
     <nav className={menuOpen ? 'main-nav nav-open' : 'main-nav'}>{links.map(link => <a key={link.href} href={link.href} onClick={() => setMenuOpen(false)}>{link.label}</a>)}</nav>
     <div className="header-actions"><button className="icon-button language-button" onClick={() => setLang(lang === 'en' ? 'fa' : 'en')} aria-label="Switch language"><Languages size={16} /><span>{lang === 'en' ? 'FA' : 'EN'}</span></button><button className="icon-button menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle menu">{menuOpen ? <X size={19} /> : <Menu size={19} />}</button></div>
   </div></header>;
@@ -221,44 +212,8 @@ function ProductCard({ product, index, lang }: { product: typeof products[number
   </motion.article>;
 }
 
-function FeatureList({ items }: { items: readonly (readonly [string, string])[] }) {
-  return <div className="feature-list">{items.map(([title, description], index) => <article className="feature-item" key={title}><span className="feature-number">{String(index + 1).padStart(2,'0')}</span><div><h4>{title}</h4><p>{description}</p></div></article>)}</div>;
-}
-
-function ProductDetails({ lang }: { lang: Language }) {
-  const t = copy[lang];
-  return <section className="details-section page-shell" id="details">
-    <div className="details-heading"><span className="section-index">02 / PRODUCT NOTES</span><h2>{lang === 'fa' ? 'محصولات، با جزئیات واقعی.' : 'The products, in more detail.'}</h2><p>{t.releaseNote}</p></div>
-    <article className="detail-block detail-pagenest" id="detail-pagenest"><div className="detail-heading"><span className="section-index">01 / ANDROID · 3.1.0</span><h3>{t.pagenestDetailTitle}</h3><p>{t.pagenestDetail}</p><div className="tech-line"><Code2 size={14} />{t.pagenestTech}</div></div><div><span className="detail-label">{t.featureIndex}</span><FeatureList items={t.pagenestFeatures} /></div></article>
-    <article className="detail-block detail-moodify" id="detail-moodify"><div className="detail-heading"><span className="section-index">02 / WEB · BILINGUAL</span><h3>{t.moodifyDetailTitle}</h3><p>{t.moodifyDetail}</p><div className="tech-line"><Code2 size={14} />{t.moodifyTech}</div></div><div><span className="detail-label">{t.featureIndex}</span><FeatureList items={t.moodifyGroups} /><p className="privacy-note"><ShieldCheck size={15} />{t.moodifyPrivacy}</p></div></article>
-    <article className="detail-block detail-gholak" id="detail-gholak"><div className="detail-heading"><span className="section-index">03 / WEB + ANDROID</span><h3>{t.gholakDetailTitle}</h3><p>{t.gholakDetail}</p><div className="tech-line"><Code2 size={14} />{t.gholakTech}</div></div><div><span className="detail-label">{t.featureIndex}</span><FeatureList items={t.gholakFeatures} /><p className="release-note"><span />{t.gholakStatusNote}</p></div></article>
-  </section>;
-}
-
-function SupportPage({ lang, siteRoot }: { lang: Language; siteRoot: string }) {
-  const t = copy[lang];
-  const [region, setRegion] = useState<'iran' | 'global'>(window.location.pathname.endsWith('support-fa') ? 'iran' : 'global');
-  return <main className="support-page page-shell">
-    <section className="support-hero"><span className="eyebrow"><Heart size={14} /> {t.supportPageKicker}</span><h1>{t.supportPageTitle}</h1><p>{t.supportPageText}</p></section>
-    <section className="support-panel"><div className="region-heading"><span className="section-index">01 / REGION</span><h2>{t.chooseRegion}</h2></div>
-      <div className="region-switch" role="tablist" aria-label={t.chooseRegion}><button role="tab" aria-selected={region === 'iran'} className={region === 'iran' ? 'active' : ''} onClick={() => setRegion('iran')}>🇮🇷 {t.iran}</button><button role="tab" aria-selected={region === 'global'} className={region === 'global' ? 'active' : ''} onClick={() => setRegion('global')}>🌐 {t.global}</button></div>
-      {region === 'iran' ? <div className="support-options">
-        <article className="support-option"><div className="option-icon pending"><Coffee size={21} /></div><span className="option-label">01 / TIP JAR</span><h3>{t.iranTitle}</h3><p>{t.iranText}</p><div className="pending-note"><span className="pending-dot" />{t.gatewayPending}</div></article>
-        <article className="support-option"><div className="option-icon"><BookOpen size={21} /></div><span className="option-label">02 / PAGENEST PRO</span><h3>{t.pagenestPro}</h3><p>{t.proText}</p><a className="button button-dark" href="https://myket.ir/app/ir.pagenest.mrambrosia" target="_blank" rel="noreferrer">{t.buyMyket}<ArrowUpRight size={16} /></a></article>
-      </div> : <div className="support-options">
-        <article className="support-option"><div className="option-icon"><Code2 size={21} /></div><span className="option-label">01 / COMMUNITY</span><h3>{t.globalTitle}</h3><p>{t.globalText}</p><a className="button button-dark" href="https://github.com/AmirSenpai" target="_blank" rel="noreferrer">{t.githubSupport}<ArrowUpRight size={16} /></a></article>
-        <article className="support-option"><div className="option-icon"><BookOpen size={21} /></div><span className="option-label">02 / PAGENEST PRO</span><h3>{t.pagenestPro}</h3><p>{t.proText}</p><div className="pending-note"><span className="pending-dot" />{t.internationalSoon}</div></article>
-      </div>}
-      <p className="redeem-note"><ShieldCheck size={16} />{t.redeemNote}</p>
-    </section>
-    <div className="support-thanks"><Sparkles size={18} /><span>{t.thanks}</span></div><a className="back-link" href={siteRoot}><ArrowUpRight size={16} />{t.backHome}</a>
-  </main>;
-}
-
 function App() {
-  const isSupportPage = /\/support(-fa)?\/?$/.test(window.location.pathname);
-  const siteRoot = getSiteRoot();
-  const [lang, setLang] = useState<Language>(() => window.location.pathname.endsWith('support-fa') ? 'fa' : (localStorage.getItem('ambrosia-lang') as Language) || 'fa');
+  const [lang, setLang] = useState<Language>(() => (localStorage.getItem('ambrosia-lang') as Language) || 'fa');
   const t = copy[lang];
   useEffect(() => {
     document.documentElement.lang = lang;
@@ -268,8 +223,8 @@ function App() {
     localStorage.setItem('ambrosia-lang', lang);
   }, [lang]);
   return <div className="app-frame">
-    <Header lang={lang} setLang={setLang} supportPage={isSupportPage} siteRoot={siteRoot} />
-    {isSupportPage ? <SupportPage lang={lang} siteRoot={siteRoot} /> : <main>
+    <Header lang={lang} setLang={setLang} />
+    <main>
       <section className="hero page-shell" id="home"><div className="hero-content"><motion.div initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45 }}>
         <span className="eyebrow"><span className="eyebrow-mark" />{t.heroKicker}</span><h1>{t.heroTitle}</h1><p className="hero-description">{t.heroText}</p>
         <div className="hero-actions"><a className="button button-primary" href="#products">{t.explore}<ArrowDown size={16} /></a><a className="button button-quiet" href="#about"><Code2 size={16} />{t.github}</a></div>
@@ -279,8 +234,8 @@ function App() {
       <section className="products-section page-shell" id="products"><div className="section-heading"><div><span className="section-index">01 — {t.productsEyebrow}</span><h2>{t.productsTitle}</h2></div><p>{t.productsIntro}</p></div><div className="products-grid">{products.map((product,index)=><ProductCard key={product.key} product={product} index={index} lang={lang} />)}</div></section>
       <section className="about-section page-shell" id="about"><div className="about-mark"><Code2 size={34} /><span>BUILD / VERIFY / IMPROVE</span></div><div className="about-copy"><span className="section-index">03 — {t.aboutKicker}</span><h2>{t.aboutTitle}</h2><p>{t.aboutText}</p><div className="principle-list">{t.principles.map((value,i)=><span key={value}><b>0{i+1}</b>{value}</span>)}</div></div></section>
       <section className="contact-section page-shell" id="contact"><div><span className="section-index">04 — CONTACT</span><h2>{t.contactTitle}</h2><p>{t.contactText}</p></div><a className="contact-link" href="mailto:itsdekusenpai@gmail.com">{t.contact}<ArrowUpRight size={18} /></a></section>
-    </main>}
-    <footer className="site-footer"><div className="footer-inner"><a className="brand" href={siteRoot}><span className="brand-symbol">m<span>.</span></span><span className="brand-name">mrambrosia<span>/ independent software</span></span></a><span>{t.footer} © {new Date().getFullYear()}</span><span className="footer-credit">{t.made}</span></div></footer>
+    </main>
+    <footer className="site-footer"><div className="footer-inner"><a className="brand" href="/"><span className="brand-symbol">m<span>.</span></span><span className="brand-name">mrambrosia<span>/ independent software</span></span></a><span>{t.footer} © {new Date().getFullYear()}</span><span className="footer-credit">{t.made}</span></div></footer>
   </div>;
 }
 
