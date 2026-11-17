@@ -83,6 +83,27 @@ After the first successful deployment:
 - `public/sitemap.xml` lists the canonical homepage.
 - `public/og-image.svg` provides a branded social preview image.
 
+
+## GitHub activity dashboard
+
+The homepage includes a compact, bilingual activity section powered by a Cloudflare Pages Function at `/api/github`.
+
+### Configure the GitHub token
+
+1. Create a GitHub personal access token (classic) with the **`read:user`** scope only. The dashboard does not read private repository contents.
+2. In GitHub, open **Settings → Public profile → Contributions & Activity** and enable **Include private contributions on my profile** if you want private activity included in the aggregate calendar and totals.
+3. In Cloudflare, open **Workers & Pages → your Pages project → Settings → Variables and Secrets**.
+4. Add `GITHUB_TOKEN` as an encrypted **Secret**, using the token value. Do not put it in a `VITE_*` variable, source file, or GitHub repository.
+5. Trigger a new deployment so the Pages Function receives the secret.
+
+The API requests only aggregate contribution totals and the public profile's public, non-fork repositories and language byte counts. It does not request private repository names, descriptions, commit messages, or source code. Private activity is only reflected in aggregate contribution counts when GitHub account settings and token permissions allow it.
+
+The endpoint caches successful responses at the edge for six hours. If the secret is missing or GitHub is unavailable, the dashboard shows a compact fallback instead of blocking the rest of the homepage.
+
+### Local development
+
+The GitHub dashboard requires the Pages Function runtime and a `GITHUB_TOKEN` secret. For local end-to-end testing, use the Cloudflare Pages local development workflow and provide the secret as a local secret; never commit a token or place it in frontend environment variables.
+
 ## Continuous integration
 
 GitHub Actions runs dependency installation, ESLint, and the production build on pushes and pull requests. It does **not** deploy to GitHub Pages; Cloudflare Pages owns production deployment.
