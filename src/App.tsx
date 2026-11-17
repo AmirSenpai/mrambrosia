@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import {
   ArrowDown, ArrowUpRight, BookOpen, Code2, Languages, Menu,
-  Palette, WalletCards, X,
+  Palette, WalletCards, X, Github, GitCommitHorizontal, GitPullRequest, FolderGit2, RefreshCw,
 } from 'lucide-react';
 
 type Language = 'en' | 'fa';
@@ -10,14 +10,14 @@ type ProjectKey = 'pagenest' | 'moodify' | 'gholak';
 
 const copy = {
   en: {
-    nav: ['Studio', 'Products', 'About'],
+    nav: ['Studio', 'Activity', 'Products', 'About'],
     heroKicker: 'INDEPENDENT SOFTWARE STUDIO · AMIR SENPAI',
     heroTitle: 'Independent software, built with purpose.',
     heroText: 'MrAmbrosia is an independent software studio creating focused digital products for reading, creativity, and personal finance.',
     explore: 'Explore the products', github: 'About the studio',
     productsEyebrow: 'THE PRODUCT LINEUP', productsTitle: 'Three products. Three clear purposes.',
     productsIntro: 'A focused collection of products, each designed around a distinct everyday need.',
-    openProduct: 'Open product',
+    openProduct: 'Open product', activityTitle: 'A year in code.', activityIntro: 'A snapshot of recent work across GitHub.', contributions: 'Contributions', commits: 'Commits', pullRequests: 'Pull requests', repositories: 'Public repositories', languagesTitle: 'Languages', languagesNote: 'Across public repositories', viewGithub: 'View GitHub profile', privateNote: 'Private activity is included as aggregate counts only when enabled in GitHub settings.', loadingActivity: 'Loading GitHub activity…', activityError: 'GitHub activity is temporarily unavailable.', retry: 'Try again', less: 'Less', more: 'More',
     pagenestType: 'ANDROID READING APP',
     pagenestSummary: 'A local-first reading library and reader for people who want their books organised, comfortable to read, and available offline.',
     moodifyType: 'BROWSER-BASED CREATIVE TOOLKIT',
@@ -39,14 +39,14 @@ const copy = {
     moodifyLinkLabel: 'Open Moodify', gholakLinkLabel: 'Open Mr Gholak', pagenestLinkLabel: 'View on Myket',
   },
   fa: {
-    nav: ['استودیو', 'محصولات', 'درباره'],
+    nav: ['استودیو', 'فعالیت', 'محصولات', 'درباره'],
     heroKicker: 'استودیوی مستقل نرم‌افزار · امیر سنپای',
     heroTitle: 'نرم‌افزار مستقل، با هدف و دقت ساخته‌شده.',
     heroText: 'MrAmbrosia یک استودیوی مستقل نرم‌افزار است که محصولاتی کاربردی در حوزه مطالعه، خلاقیت و مدیریت مالی توسعه می‌دهد.',
     explore: 'دیدن محصولات', github: 'درباره استودیو',
     productsEyebrow: 'محصولات استودیو', productsTitle: 'سه محصول، با سه کاربرد روشن.',
     productsIntro: 'مجموعه‌ای از محصولات مستقل که هرکدام برای پاسخ به یک نیاز مشخص طراحی شده‌اند.',
-    openProduct: 'ورود به محصول', productDetails: 'جزئیات محصول',
+    openProduct: 'ورود به محصول', activityTitle: 'یک سال فعالیت برنامه‌نویسی.', activityIntro: 'نمایی از فعالیت‌های اخیر در گیت‌هاب.', contributions: 'مشارکت‌ها', commits: 'کامیت‌ها', pullRequests: 'پول‌ریکوئست‌ها', repositories: 'مخازن عمومی', languagesTitle: 'زبان‌ها', languagesNote: 'بر اساس مخازن عمومی', viewGithub: 'مشاهده پروفایل گیت‌هاب', privateNote: 'فعالیت مخازن خصوصی، در صورت فعال‌بودن تنظیمات گیت‌هاب، فقط به‌شکل آمار تجمیعی نمایش داده می‌شود.', loadingActivity: 'در حال دریافت آمار گیت‌هاب…', activityError: 'دریافت آمار گیت‌هاب موقتاً ممکن نیست.', retry: 'تلاش دوباره', less: 'کمتر', more: 'بیشتر', productDetails: 'جزئیات محصول',
     pagenestType: 'کتاب‌خوان اندروید',
     pagenestSummary: 'کتابخانه و کتاب‌خوانی آفلاین و محلی برای کسانی که می‌خواهند کتاب‌هایشان مرتب، خواندنشان راحت و همیشه در دسترس باشد.',
     moodifyType: 'مجموعه ابزارهای خلاقانه تحت وب',
@@ -80,8 +80,9 @@ function Header({ lang, setLang }: { lang: Language; setLang: (v: Language) => v
   const [menuOpen, setMenuOpen] = useState(false);
   const links = [
     { href: '#home', label: t.nav[0] },
-    { href: '#products', label: t.nav[1] },
-    { href: '#about', label: t.nav[2] },
+    { href: '#activity', label: t.nav[1] },
+    { href: '#products', label: t.nav[2] },
+    { href: '#about', label: t.nav[3] },
   ];
   return <header className="site-header"><div className="header-inner">
     <a className="brand" href="/" aria-label="MrAmbrosia home"><span className="brand-symbol">m<span>.</span></span><span className="brand-name">mrambrosia<span>/ independent software</span></span></a>
@@ -120,6 +121,92 @@ function ProductCard({ product, index, lang }: { product: typeof products[number
   </motion.article>;
 }
 
+
+type ActivityDay = { date: string; weekday: number; contributionCount: number; contributionLevel: string };
+type ActivityData = {
+  profile: { username: string; url: string; followers: number; publicRepositories: number };
+  stats: { total: number; commits: number; pullRequests: number; issues: number };
+  calendar: Array<{ contributionDays: ActivityDay[] }>;
+  languages: Array<{ name: string; color: string; percentage: number }>;
+};
+
+function GitHubActivity({ lang }: { lang: Language }) {
+  const t = copy[lang];
+  const [data, setData] = useState<ActivityData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [failed, setFailed] = useState(false);
+  const [attempt, setAttempt] = useState(0);
+  const number = (value: number) => new Intl.NumberFormat(lang === 'fa' ? 'fa-IR' : 'en-US').format(value);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    setLoading(true);
+    setFailed(false);
+    fetch('/api/github', { signal: controller.signal })
+      .then(response => {
+        if (!response.ok) throw new Error('GitHub activity request failed');
+        return response.json() as Promise<ActivityData>;
+      })
+      .then(result => setData(result))
+      .catch(error => {
+        if (error.name !== 'AbortError') setFailed(true);
+      })
+      .finally(() => {
+        if (!controller.signal.aborted) setLoading(false);
+      });
+    return () => controller.abort();
+  }, [attempt]);
+
+  const stats = data ? [
+    { label: t.contributions, value: data.stats.total, icon: Github },
+    { label: t.commits, value: data.stats.commits, icon: GitCommitHorizontal },
+    { label: t.pullRequests, value: data.stats.pullRequests, icon: GitPullRequest },
+    { label: t.repositories, value: data.profile.publicRepositories, icon: FolderGit2 },
+  ] : [];
+
+  return <section className="activity-section page-shell" id="activity">
+    <div className="activity-heading">
+      <div><span className="section-index">01 — GITHUB ACTIVITY</span><h2>{t.activityTitle}</h2><p>{t.activityIntro}</p></div>
+      <a className="activity-profile-link" href="https://github.com/AmirSenpai" target="_blank" rel="noreferrer"><Github size={16} />{t.viewGithub}<ArrowUpRight size={14} /></a>
+    </div>
+    {loading && <div className="activity-loading" aria-live="polite"><span className="activity-spinner" />{t.loadingActivity}</div>}
+    {failed && !loading && <div className="activity-error" role="status"><span>{t.activityError}</span><button onClick={() => setAttempt(value => value + 1)}><RefreshCw size={14} />{t.retry}</button></div>}
+    {data && <>
+      <div className="activity-stats">{stats.map(item => {
+        const Icon = item.icon;
+        return <article className="activity-stat" key={item.label}><Icon size={16} /><span>{item.label}</span><strong>{number(item.value)}</strong></article>;
+      })}</div>
+      <div className="activity-panels">
+        <div className="activity-panel contribution-panel">
+          <div className="activity-panel-heading"><div><h3>{t.contributions}</h3><span>{number(data.stats.total)} · {lang === 'fa' ? '۳۶۵ روز گذشته' : 'last 365 days'}</span></div><span className="activity-year">{data.calendar.length ? new Date().getFullYear() : ''}</span></div>
+          <div className="heatmap-scroll"><div className="contribution-heatmap" role="group" aria-label="GitHub contribution activity for the last year">
+            {data.calendar.map((week, weekIndex) => week.contributionDays.map(day =>
+              <span
+                key={day.date}
+                className={'contribution-day level-' + day.contributionLevel.toLowerCase().replace('_quartile', '')}
+                style={{ gridColumn: weekIndex + 1, gridRow: day.weekday + 1 }}
+                title={`${number(day.contributionCount)} · ${day.date}`}
+                aria-label={`${day.date}: ${day.contributionCount} contributions`}
+              />
+            ))}
+          </div></div>
+          <div className="heatmap-legend"><span>{t.less}</span><i className="level-none" /><i className="level-first" /><i className="level-second" /><i className="level-third" /><i className="level-fourth" /><span>{t.more}</span></div>
+          <p className="activity-private-note">{t.privateNote}</p>
+        </div>
+        <div className="activity-panel languages-panel">
+          <div className="activity-panel-heading"><div><h3>{t.languagesTitle}</h3><span>{t.languagesNote}</span></div><Code2 size={17} /></div>
+          {data.languages.length ? <div className="language-list">{data.languages.map(language =>
+            <div className="language-row" key={language.name}>
+              <div className="language-label"><span><i style={{ background: language.color }} />{language.name}</span><b>{number(language.percentage)}%</b></div>
+              <div className="language-track"><i style={{ width: language.percentage + '%', background: language.color }} /></div>
+            </div>
+          )}</div> : <p className="activity-private-note">{t.languagesNote}</p>}
+        </div>
+      </div>
+    </>}
+  </section>;
+}
+
 function App() {
   const [lang, setLang] = useState<Language>(() => (localStorage.getItem('ambrosia-lang') as Language) || 'fa');
   const t = copy[lang];
@@ -139,7 +226,8 @@ function App() {
       </motion.div></div>
       <motion.div className="hero-art" initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.55, delay: 0.08 }}><div className="hero-art-grid" /><div className="hero-orbit hero-orbit-a" /><div className="hero-orbit hero-orbit-b" /><div className="hero-mark"><span>MR</span><strong>AMBROSIA</strong><small>SOFTWARE / STUDIO</small></div><div className="hero-side-note">IDEAS INTO SOFTWARE</div><div className="hero-coordinate">INDEPENDENT / PRODUCT STUDIO</div></motion.div>
       <div className="hero-bottom"><span>{t.projectCount}</span><span>{t.scroll} ↓</span></div></section>
-      <section className="products-section page-shell" id="products"><div className="section-heading"><div><span className="section-index">01 — {t.productsEyebrow}</span><h2>{t.productsTitle}</h2></div><p>{t.productsIntro}</p></div><div className="products-grid">{products.map((product,index)=><ProductCard key={product.key} product={product} index={index} lang={lang} />)}</div></section>
+      <GitHubActivity lang={lang} />
+      <section className="products-section page-shell" id="products"><div className="section-heading"><div><span className="section-index">02 — {t.productsEyebrow}</span><h2>{t.productsTitle}</h2></div><p>{t.productsIntro}</p></div><div className="products-grid">{products.map((product,index)=><ProductCard key={product.key} product={product} index={index} lang={lang} />)}</div></section>
       <section className="about-section page-shell" id="about"><div className="about-mark"><Code2 size={34} /><span>BUILD / VERIFY / IMPROVE</span></div><div className="about-copy"><span className="section-index">03 — {t.aboutKicker}</span><h2>{t.aboutTitle}</h2><p>{t.aboutText}</p><div className="principle-list">{t.principles.map((value,i)=><span key={value}><b>0{i+1}</b>{value}</span>)}</div></div></section>
       <section className="contact-section page-shell" id="contact"><div><span className="section-index">04 — CONTACT</span><h2>{t.contactTitle}</h2><p>{t.contactText}</p></div><a className="contact-link" href="mailto:itsdekusenpai@gmail.com">{t.contact}<ArrowUpRight size={18} /></a></section>
     </main>
