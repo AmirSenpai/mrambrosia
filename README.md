@@ -1,101 +1,92 @@
 # MrAmbrosia
 
-MrAmbrosia is the independent software studio and product home of Amir (AmirSenpai).
+MrAmbrosia is an independent software studio creating focused digital products for reading, creativity, and personal finance.
 
-**Website:** https://mrambrosia.ir
-
-The site presents three products using information checked against their current project sources. Product source repositories are private and are intentionally not linked from the public site.
+**Production website:** https://mrambrosia.ir  
+**Repository:** https://github.com/AmirSenpai/mrambrosia
 
 ## Products
 
-### PageNest
+- **PageNest** — An offline-first Android reading app. [Google Play alternative / Myket listing](https://myket.ir/app/ir.pagenest.mrambrosia)
+- **Moodify** — A bilingual browser-based creative and file toolkit. [Open Moodify](https://moodifyweb.ir)
+- **Mr Gholak** — A Persian-first personal finance app for web and Android. [Open web app](https://webapp.mrgholak.ir)
 
-**Android reading app · latest repository version 3.1.0**
+Product descriptions on the website are intentionally concise. Private source repositories and internal development notes are not linked publicly.
 
-PageNest is a local-first reading library and Android reader. Its library supports EPUB, PDF, TXT, Markdown, FictionBook (FB2), and comic archives (CBZ), with cover extraction, search, sorting, custom shelves, and reading-status filters.
+## Tech stack
 
-The reader includes paged and vertical layouts, table of contents, bookmarks, highlights, marginal notes, in-book search, shareable quote cards, custom TTF/OTF fonts, text-to-speech Listen Mode, and on-device translation.
+- React 19
+- TypeScript
+- Vite 8
+- Tailwind CSS 4
+- Framer Motion
+- Lucide React
 
-Reading tools include daily goals, reading-time and page statistics, per-book progress, streaks, opt-in reminders, and Android home-screen widgets. PageNest Studio is currently documented as a beta offline writing environment with multi-chapter manuscripts, autosave, word counts, RTL/LTR writing, basic Markdown formatting, Markdown export, and EPUB publishing into the library.
+## Local development
 
-- Public product destination: https://myket.ir/app/ir.pagenest.mrambrosia
-- Implementation documented in the project: Kotlin, Jetpack Compose, Room, WorkManager, Android Glance, and ML Kit.
-- Supporter activation is handled inside the app. Activation codes are never published on this website.
-
-### Moodify
-
-**Bilingual browser-based creative and file toolkit**
-
-Moodify provides Persian and English routes and a collection of browser tools:
-
-- **Create:** Polaroid-style photo frames; profile/avatar artwork with extracted colour palettes; 8-bit avatars; wallpapers; static music-player visuals; Spotify-style cards.
-- **Make and convert:** GIFs from images or short video; image compression; image-to-PDF; PDF-to-images; image format conversion.
-- **Utilities:** QR-code generation; image metadata removal; text styling.
-- **Content:** News, blog, about, privacy, and donation pages.
-
-The project describes its image workflows as browser-side processing: selected files are processed locally rather than uploaded to a processing server.
-
-- Public product destination: https://moodifyweb.ir
-- Implementation documented in the project: React, Vite, React Router, i18next, PDF.js, and JSZip.
-
-### Mr Gholak
-
-**Persian-first personal finance app · web and Android**
-
-Mr Gholak is designed around everyday Persian financial workflows. Its documented product scope includes income and expense tracking, budgets, debts and receivables, instalments, savings goals, assets and net worth, Jalali-calendar views, monthly reporting, receipts, SMS transaction import, backup and restore, account features, notifications, and Android widgets.
-
-Gholakyar provides a finance-focused assistant with a rules-based on-device fallback when the remote AI service is unavailable.
-
-**Release status:** The current repository README describes version 2.0.0 as a release candidate and explicitly says native build, real-device testing, and browser QA are still release gates. The web app is available; this site does not claim that Android 2.0.0 has shipped publicly.
-
-- Website: https://mrgholak.ir
-- Web app: https://webapp.mrgholak.ir
-- Support: info@mrgholak.ir
-- Implementation documented in the project: Expo, React Native, React Native Web, and Supabase.
-
-## Studio approach
-
-- Describe shipped features separately from beta work and release candidates.
-- Keep product identities distinct rather than forcing one visual style onto every app.
-- Prefer useful, understandable interfaces over decorative complexity.
-- Be explicit about data handling, integrations, and payment availability.
-- Do not publish private source repositories or internal activation codes.
-
-## Support
-
-The support pages are:
-
-- International: https://mrambrosia.ir/support
-- Iran: https://mrambrosia.ir/support-fa
-
-The PageNest `MonetizationConfig.kt` file is the source of truth for the support destinations represented on the site:
-
-- Iran tip-jar destination: the support page above. The local payment gateway is not connected.
-- International tip-jar destination: the support page above. A dedicated international payment provider is not configured.
-- GitHub community support: https://github.com/AmirSenpai
-- PageNest Pro in Iran: https://myket.ir/app/ir.pagenest.mrambrosia
-- International PageNest Pro checkout: not active.
-
-The site intentionally does not expose accepted supporter activation codes. PageNest codes are redeemed inside the app.
-
-## Design and implementation
-
-- Single dark theme; there is no light-mode or accent-theme switch.
-- English and Persian copy with automatic LTR/RTL document direction.
-- Responsive product directory with separate visual treatments for the reader, creative toolkit, and finance app.
-- Reduced-motion support and semantic links/buttons.
-- Original visual assets and layout; no ArtCraft branding or proprietary assets are reused.
-
-Built with React, TypeScript, Vite, Tailwind CSS, Framer Motion, and Lucide icons.
-
-## Development
+Requirements: Node.js 22 or newer and npm.
 
 ```bash
 npm ci
 npm run dev
+```
+
+## Quality checks
+
+Run these before publishing:
+
+```bash
 npm run lint
 npm run build
 npm run preview
 ```
 
-GitHub Pages deployment builds the Vite site, copies the entry point to `404.html` for SPA route fallback, and deploys the `dist/` directory.
+The production build is generated in `dist/`.
+
+## Deploy to Cloudflare Pages
+
+This repository is configured for **Cloudflare Pages Git integration**. No Wrangler token, GitHub Pages deployment, or build-time secret is required.
+
+1. Open the [Cloudflare dashboard](https://dash.cloudflare.com/) and select **Workers & Pages**.
+2. Choose **Create application → Pages → Connect to Git**.
+3. Authorize GitHub and select `AmirSenpai/mrambrosia`.
+4. Set the build configuration:
+
+   | Setting | Value |
+   | --- | --- |
+   | Production branch | `main` |
+   | Framework preset | `Vite` |
+   | Root directory | `/` (repository root) |
+   | Build command | `npm run build` |
+   | Build output directory | `dist` |
+   | Node.js version | `22` |
+
+5. Select **Save and Deploy**.
+
+Cloudflare will build and publish the site. New commits pushed to `main` will trigger production deployments; other branches can be used for preview deployments.
+
+### Custom domain
+
+After the first successful deployment:
+
+1. Open the Pages project → **Custom domains**.
+2. Select **Set up a custom domain**.
+3. Add `mrambrosia.ir` and follow Cloudflare's DNS instructions.
+4. Add `www.mrambrosia.ir` only if you intend to use it; configure a redirect to the canonical apex domain.
+5. Confirm HTTPS is active before submitting the site to search engines.
+
+### Cloudflare configuration
+
+- `public/_headers` is copied into the deployment and defines security and cache headers.
+- `public/_redirects` redirects retired support URLs to the homepage.
+- `public/robots.txt` allows indexing and points crawlers to the sitemap.
+- `public/sitemap.xml` lists the canonical homepage.
+- `public/og-image.svg` provides a branded social preview image.
+
+## Continuous integration
+
+GitHub Actions runs dependency installation, ESLint, and the production build on pushes and pull requests. It does **not** deploy to GitHub Pages; Cloudflare Pages owns production deployment.
+
+## SEO
+
+The site includes a canonical URL, localized search description, Open Graph and Twitter metadata, an organization JSON-LD record, a crawlable sitemap, and a robots policy. Search engines may take time to recrawl updated pages after deployment.
