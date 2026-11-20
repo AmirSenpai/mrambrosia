@@ -6,7 +6,7 @@ import {
 } from 'lucide-react';
 
 type Language = 'en' | 'fa';
-type ProjectKey = 'pagenest' | 'moodify' | 'gholak';
+type ProjectKey = 'atlas' | 'moodify' | 'gholak';
 
 const copy = {
   en: {
@@ -18,13 +18,13 @@ const copy = {
     productsEyebrow: 'THE PRODUCT LINEUP', productsTitle: 'Three products. Three clear purposes.',
     productsIntro: 'A focused collection of products, each designed around a distinct everyday need.',
     openProduct: 'Open product', activityTitle: 'A year in code.', activityIntro: 'A snapshot of recent work across GitHub.', contributions: 'Contributions', commits: 'Commits', pullRequests: 'Pull requests', repositories: 'Public repositories', languagesTitle: 'Languages', languagesNote: 'Across public repositories', viewGithub: 'View GitHub profile', privateNote: 'Private activity is included as aggregate counts only when enabled in GitHub settings.', loadingActivity: 'Loading GitHub activity…', activityError: 'GitHub activity is temporarily unavailable.', retry: 'Try again', less: 'Less', more: 'More',
-    pagenestType: 'ANDROID READING APP',
-    pagenestSummary: 'A local-first reading library and reader for people who want their books organised, comfortable to read, and available offline.',
+    atlasType: 'NATIVE ANDROID DIGITAL LIBRARY',
+    atlasSummary: 'A minimalist, offline-first digital library and multi-format reader for books, documents, and audiobooks, with a focused writing studio.',
     moodifyType: 'BROWSER-BASED CREATIVE TOOLKIT',
     moodifySummary: 'A bilingual collection of small creative and file tools: make visual pieces, prepare images and documents, and create assets in the browser.',
     gholakType: 'PERSIAN PERSONAL FINANCE · WEB + ANDROID',
     gholakSummary: 'A Persian-first money manager for tracking everyday finances, planning ahead, and keeping a clearer picture of what comes in and goes out.',
-    current: 'Current status', pagenestStatus: 'Android · available', moodifyStatus: 'Web app · available', gholakStatus: 'Web app · available',
+    current: 'Current status', atlasStatus: 'Android · available', moodifyStatus: 'Web app · available', gholakStatus: 'Web app · available',
     aboutKicker: 'ABOUT THE STUDIO', aboutTitle: 'Independent software, thoughtfully made.',
     aboutText: 'MrAmbrosia is an independent software studio founded by Amir. We build practical digital products with a focus on clarity, usability, and thoughtful engineering.',
     principles: ['Build for a real use case', 'Respect people’s data', 'Be clear about product status', 'Improve the details'],
@@ -36,7 +36,7 @@ const copy = {
     contact: 'Email Amir', footer: 'Independent software, built with care.',
     language: 'Language', made: 'DESIGNED & BUILT BY AMIR',
     projectCount: '03 / PRODUCTS', scroll: 'SCROLL TO EXPLORE',
-    moodifyLinkLabel: 'Open Moodify', gholakLinkLabel: 'Open Mr Gholak', pagenestLinkLabel: 'View on Myket',
+    moodifyLinkLabel: 'Open Moodify', gholakLinkLabel: 'Open Mr Gholak', atlasLinkLabel: 'View on Myket',
   },
   fa: {
     nav: ['استودیو', 'فعالیت', 'محصولات', 'درباره'],
@@ -47,13 +47,13 @@ const copy = {
     productsEyebrow: 'محصولات استودیو', productsTitle: 'سه محصول، با سه کاربرد روشن.',
     productsIntro: 'مجموعه‌ای از محصولات مستقل که هرکدام برای پاسخ به یک نیاز مشخص طراحی شده‌اند.',
     openProduct: 'ورود به محصول', activityTitle: 'یک سال فعالیت برنامه‌نویسی.', activityIntro: 'نمایی از فعالیت‌های اخیر در گیت‌هاب.', contributions: 'مشارکت‌ها', commits: 'کامیت‌ها', pullRequests: 'پول‌ریکوئست‌ها', repositories: 'مخازن عمومی', languagesTitle: 'زبان‌ها', languagesNote: 'بر اساس مخازن عمومی', viewGithub: 'مشاهده پروفایل گیت‌هاب', privateNote: 'فعالیت مخازن خصوصی، در صورت فعال‌بودن تنظیمات گیت‌هاب، فقط به‌شکل آمار تجمیعی نمایش داده می‌شود.', loadingActivity: 'در حال دریافت آمار گیت‌هاب…', activityError: 'دریافت آمار گیت‌هاب موقتاً ممکن نیست.', retry: 'تلاش دوباره', less: 'کمتر', more: 'بیشتر', productDetails: 'جزئیات محصول',
-    pagenestType: 'کتاب‌خوان اندروید',
-    pagenestSummary: 'کتابخانه و کتاب‌خوانی آفلاین و محلی برای کسانی که می‌خواهند کتاب‌هایشان مرتب، خواندنشان راحت و همیشه در دسترس باشد.',
+    atlasType: 'کتابخانه دیجیتال اندروید',
+    atlasSummary: 'کتابخانه دیجیتال و کتاب‌خوان چندقالب آفلاین برای کتاب‌ها، اسناد و کتاب‌های صوتی؛ همراه با استودیوی نوشتن.',
     moodifyType: 'مجموعه ابزارهای خلاقانه تحت وب',
     moodifySummary: 'مجموعه‌ای دوزبانه از ابزارهای کوچک خلاقانه و فایل؛ برای ساخت محتوای بصری، آماده‌سازی عکس و سند و انجام کارها در مرورگر.',
     gholakType: 'مدیریت مالی فارسی · وب و اندروید',
     gholakSummary: 'مدیریت مالی فارسی‌محور برای ثبت دخل‌وخرج، برنامه‌ریزی و داشتن تصویری روشن‌تر از پولی که وارد و خارج می‌شود.',
-    current: 'وضعیت فعلی', pagenestStatus: 'اندروید · در دسترس', moodifyStatus: 'وب‌اپ · در دسترس', gholakStatus: 'وب‌اپ · در دسترس',
+    current: 'وضعیت فعلی', atlasStatus: 'اندروید · در دسترس', moodifyStatus: 'وب‌اپ · در دسترس', gholakStatus: 'وب‌اپ · در دسترس',
     aboutKicker: 'درباره استودیو', aboutTitle: 'نرم‌افزار مستقل، با تمرکز بر کیفیت.',
     aboutText: 'MrAmbrosia استودیوی مستقل نرم‌افزار به بنیان‌گذاری امیر است. تمرکز ما توسعه محصولات دیجیتال کاربردی با رابطی روشن، تجربه‌ای قابل‌اعتماد و مهندسی دقیق است.',
     principles: ['ساخت برای یک نیاز واقعی', 'احترام به داده کاربران', 'شفافیت درباره وضعیت محصول', 'بهبود جزئیات'],
@@ -65,12 +65,12 @@ const copy = {
     contact: 'ایمیل به امیر', footer: 'نرم‌افزار مستقل، با دقت ساخته‌شده.',
     language: 'زبان', made: 'طراحی و توسعه توسط امیر',
     projectCount: '۰۳ / محصول', scroll: 'برای دیدن بیشتر اسکرول کن',
-    moodifyLinkLabel: 'ورود به Moodify', gholakLinkLabel: 'ورود به Mr Gholak', pagenestLinkLabel: 'مشاهده در مایکت',
+    moodifyLinkLabel: 'ورود به Moodify', gholakLinkLabel: 'ورود به Mr Gholak', atlasLinkLabel: 'مشاهده در مایکت',
   },
 } as const;
 
 const products: { key: ProjectKey; number: string; name: string; href: string; kind: string }[] = [
-  { key: 'pagenest', number: '01', name: 'PageNest', href: 'https://myket.ir/app/ir.pagenest.mrambrosia', kind: 'book' },
+  { key: 'atlas', number: '01', name: 'ATLAS', href: 'https://myket.ir/app/ir.atlas.mrambrosia', kind: 'book' },
   { key: 'moodify', number: '02', name: 'Moodify', href: 'https://www.moodifyweb.ir/fa/home', kind: 'mood' },
   { key: 'gholak', number: '03', name: 'Mr Gholak', href: 'https://webapp.mrgholak.ir', kind: 'gholak' },
 ];
@@ -93,10 +93,10 @@ function Header({ lang, setLang }: { lang: Language; setLang: (v: Language) => v
 
 function ProductArtwork({ kind }: { kind: string }) {
   if (kind === 'book') return <div className="artwork artwork-book" aria-hidden="true">
-    <div className="book-backdrop-grid" /><div className="book-ring ring-one" /><div className="book-ring ring-two" />
-    <div className="book-spread"><div className="book-page-left"><span>CHAPTER 04</span><i /><i /><i /><i /><i /><b>—</b></div><div className="book-page-right"><span>THE NEXT PAGE</span><strong>Read<br />at your<br />own pace.</strong><small>PAGENEST / 3.1</small></div></div>
+    <div className="book-backdrop-grid" /><div className="book-ring ring-one" /><div className="book-ring ring-two" /><div className="atlas-logo-plate"><img src="/atlas-logo.svg" alt="" /></div>
+    <div className="book-spread"><div className="book-page-left"><span>CHAPTER 04</span><i /><i /><i /><i /><i /><b>—</b></div><div className="book-page-right"><span>THE NEXT PAGE</span><strong>Your<br />world of<br />knowledge.</strong><small>ATLAS / 3.3</small></div></div>
     <div className="reading-progress"><span>READING PROGRESS</span><b>68%</b><i><em /></i></div>
-    <span className="art-label">A LIBRARY THAT STAYS YOURS</span>
+    <span className="art-label">YOUR WORLD OF KNOWLEDGE</span>
   </div>;
   if (kind === 'mood') return <div className="artwork artwork-mood" aria-hidden="true">
     <div className="mood-grid" /><div className="mood-window"><div className="mood-window-top"><i /><i /><i /><span>MOODIFY / TOOLKIT</span></div><div className="mood-tiles"><div className="mood-tile tile-polaroid"><span>PHOTO</span><b>01</b></div><div className="mood-tile tile-avatar"><span>AVATAR</span><b>✳</b></div><div className="mood-tile tile-qr"><span>QR CODE</span><b>▦</b></div><div className="mood-tile tile-music"><span>MUSIC</span><b>♫</b></div></div><div className="mood-window-foot"><span>CREATE</span><span>CONVERT</span><span>EXPORT</span></div></div>
@@ -110,13 +110,13 @@ function ProductArtwork({ kind }: { kind: string }) {
 
 function ProductCard({ product, index, lang }: { product: typeof products[number]; index: number; lang: Language }) {
   const t = copy[lang];
-  const summary = { pagenest: t.pagenestSummary, moodify: t.moodifySummary, gholak: t.gholakSummary }[product.key];
-  const type = { pagenest: t.pagenestType, moodify: t.moodifyType, gholak: t.gholakType }[product.key];
-  const status = { pagenest: t.pagenestStatus, moodify: t.moodifyStatus, gholak: t.gholakStatus }[product.key];
-  const Icon = { pagenest: BookOpen, moodify: Palette, gholak: WalletCards }[product.key];
+  const summary = { atlas: t.atlasSummary, moodify: t.moodifySummary, gholak: t.gholakSummary }[product.key];
+  const type = { atlas: t.atlasType, moodify: t.moodifyType, gholak: t.gholakType }[product.key];
+  const status = { atlas: t.atlasStatus, moodify: t.moodifyStatus, gholak: t.gholakStatus }[product.key];
+  const Icon = { atlas: BookOpen, moodify: Palette, gholak: WalletCards }[product.key];
   return <motion.article className={'product-card product-' + product.kind} initial={{ opacity: 0, y: 22 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.12 }} transition={{ duration: 0.45, delay: index * 0.07 }}>
     <div className="product-art"><ProductArtwork kind={product.kind} /><span className="product-number">{product.number}</span></div>
-    <div className="product-body"><div className="product-meta"><span>{type}</span><span className="product-status"><i />{status}</span></div><h3>{product.name}<span>.</span></h3><p>{summary}</p><div className="product-actions"><a className="text-link" href={product.href} target="_blank" rel="noreferrer">{product.key === 'pagenest' ? t.pagenestLinkLabel : product.key === 'moodify' ? t.moodifyLinkLabel : t.gholakLinkLabel}<ArrowUpRight size={15} /></a></div></div>
+    <div className="product-body"><div className="product-meta"><span>{type}</span><span className="product-status"><i />{status}</span></div><h3>{product.name}<span>.</span></h3><p>{summary}</p><div className="product-actions"><a className="text-link" href={product.href} target="_blank" rel="noreferrer">{product.key === 'atlas' ? t.atlasLinkLabel : product.key === 'moodify' ? t.moodifyLinkLabel : t.gholakLinkLabel}<ArrowUpRight size={15} /></a></div></div>
     <div className="product-index"><Icon size={15} /><span>{product.number} / 03</span></div>
   </motion.article>;
 }
