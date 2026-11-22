@@ -7,7 +7,7 @@ MrAmbrosia is an independent software studio creating focused digital products f
 
 ## Products
 
-- **ATLAS** — A minimalist, offline-first Android digital library and multi-format reader for books, documents, and audiobooks, with a focused writing studio. [Myket listing](https://myket.ir/app/ir.pagenest.mrambrosia)
+- **ATLAS** — A minimalist, offline-first Android digital library and multi-format reader for books, documents, and audiobooks, with a focused writing studio. [Myket listing](https://myket.ir/app/ir.atlas.mrambrosia)
 - **Moodify** — A bilingual browser-based creative and file toolkit. [Open Moodify](https://moodifyweb.ir)
 - **Mr Gholak** — A Persian-first personal finance app for web and Android. [Open web app](https://webapp.mrgholak.ir)
 
